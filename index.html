@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -17,10 +18,10 @@
                 <form>
                     <div class="form-group">
                         <label for="InputFile">File input</label>
-                        <input type="file" id="InputFile">
+                        <input type="file" id="InputFile" accept="text/xml">
                         <p class="help-block">Choose XML or JSON input file.</p>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button id="inputSubmitBtn" type="submit" class="btn btn-default">Submit</button>
                 </form>
             </div>
         </div>
@@ -55,8 +56,53 @@
                 </label>
             </div>
         </div>
-    </div>
 
+        <div id="paletteFrame" class="row frame">
+            <div class="col-md-12">
+                <label for="palette">Your palette:</label>
+            </div>
+            <div id="palette" class="col-md-12">
+                <div class="paletteSelection">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(254,240,217)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(253,204,138)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(252,141,89)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(227,74,51)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(179,0,0)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div class="paletteSelection">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(202,0,32)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(244,165,130)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(247,247,247)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(146,197,222)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(5,113,176)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div class="paletteSelection">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(215,25,28)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(253,174,97)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(255,255,191)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(166,217,106)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(26,150,65)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div class="paletteSelection">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(27,158,119)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(217,95,2)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(117,112,179)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(231,41,138)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(102,166,30)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+    </div>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

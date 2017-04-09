@@ -13,3 +13,26 @@ body{
     border-radius: 5px;
     padding: 5px;
 }
+
+.paletteSelection{
+    float: left;
+    width: 25px;
+    height: 85px;
+    /*margin-right: 15px;*/
+    text-align: center;
+}
+
+svg{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.paletteSelection:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+#nOdataClasses:hover{
+    cursor: pointer;
+}
