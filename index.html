@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -15,10 +14,10 @@
     <div class="container">
         <div class="row frame">
             <div class="col-xs-12">
-                <form>
+                <form enctype="multipart/form-data" action="upload_file.php" method="post">
                     <div class="form-group">
                         <label for="InputFile">File input</label>
-                        <input type="file" id="InputFile" accept="text/xml">
+                        <input type="file" id="InputFile" accept=".csv, .geojson">
                         <p class="help-block">Choose XML or JSON input file.</p>
                     </div>
                     <button id="inputSubmitBtn" type="submit" class="btn btn-default">Submit</button>
@@ -45,6 +44,7 @@
                 <label style="margin-right: 10px;">Nature of your data:</label>
             </div>
             <div class="col-xs-12 col-md-8">
+                <form id="radioBtnsForm">
                 <label class="radio-inline">
                     <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> sequential
                 </label>
@@ -54,6 +54,7 @@
                 <label class="radio-inline">
                     <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> qualitative
                 </label>
+                </form>
             </div>
         </div>
 
@@ -63,12 +64,12 @@
             </div>
             <div id="palette" class="col-md-12">
                 <div class="paletteSelection">
-                    <svg width="15" height="75">
-                        <rect fill="rgb(254,240,217)" width="15" height="15" y="0"></rect>
-                        <rect fill="rgb(253,204,138)" width="15" height="15" y="15"></rect>
-                        <rect fill="rgb(252,141,89)" width="15" height="15" y="30"></rect>
-                        <rect fill="rgb(227,74,51)" width="15" height="15" y="45"></rect>
-                        <rect fill="rgb(179,0,0)" width="15" height="15" y="60"></rect>
+                    <svg id="aaaa" width="15" height="75">
+                        <rect id="aa" fill="rgb(254,240,217)" width="15" height="15" y="0"></rect>
+                        <rect id="bb" fill="rgb(253,204,138)" width="15" height="15" y="15"></rect>
+                        <rect id="cc" fill="rgb(252,141,89)" width="15" height="15" y="30"></rect>
+                        <rect id="dd" fill="rgb(227,74,51)" width="15" height="15" y="45"></rect>
+                        <rect id="ee" fill="rgb(179,0,0)" width="15" height="15" y="60"></rect>
                     </svg>
                 </div>
                 <div class="paletteSelection">
@@ -98,11 +99,11 @@
                         <rect fill="rgb(102,166,30)" width="15" height="15" y="60"></rect>
                     </svg>
                 </div>
-                <div style="clear: both"></div>
             </div>
+            <div style="clear: both"></div>
         </div>
     </div>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/myscripts.js"></script>
 </body>
 </html>
