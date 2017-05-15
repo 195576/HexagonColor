@@ -43,3 +43,57 @@ function getradio(){
         $('#palette')[0].appendChild(divElement);
     }
 }
+
+var points = [];
+
+$('#InputFile').ready(function () {
+    d3.json("geo.json", function (error, data) {
+        nodes = data.features;
+
+        var propertiesArray = [];
+
+        var li, i, noFeatures,
+        list = document.getElementById("list");
+        noFeatures = data.features.length;
+
+        var feature, property, numberOfProperties;
+        numberOfProperties = 0;
+
+        feature = data.features[0].properties;
+        for (property in feature) {
+            if (feature.hasOwnProperty(property)) {
+                numberOfProperties++;
+            }
+        }
+
+        for (i = 0; i < noFeatures; i++) {
+            feature = data.features[i].properties;
+            for (property in feature) {
+                if (feature.hasOwnProperty(property)) {
+                    // numberOfProperties++;
+                    propertiesArray.push(feature[property]);
+                    console.log(feature[property]);
+                }
+            }
+        }
+
+        document.getElementById('numberOfProperties').innerHTML = numberOfProperties;
+
+        var liProperty, ul;
+        for (i = 0; i< propertiesArray.length; i++) {
+            li = document.createElement("li");
+            li.innerHTML = i + 1;
+
+            ul = document.createElement("ul");
+
+            liProperty = document.createElement("li");
+            liProperty.innerHTML = propertiesArray[i];
+
+            ul.appendChild(liProperty);
+            li.appendChild(ul);
+            list.appendChild(li);
+        }
+        //document.body.appendChild(list);
+        $("#list").innerHTML = list;
+    });
+});
