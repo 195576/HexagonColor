@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "weight": 0.005,
+        "weight": 0.002,
 		"test": "3213"
       },
       "geometry": {
