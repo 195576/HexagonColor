@@ -2,14 +2,14 @@ $(function() {
 
     $('#paletteFrame').hide();
 
-    $('#inputSubmitBtn').click(function (evt){
-
-        evt.preventDefault();
-        $('#paletteFrame').slideDown(1000);
-        getradio();
-    });
+    // $('#inputSubmitBtn').click(function (evt){
+    //
+    //     evt.preventDefault();
+    //     $('#paletteFrame').slideDown(1000);
+    // });
 });
 
+var resultPaletteDescription = [];
 
 function submitBtnOnClick () {
     switch ($('input[name=inlineRadioOptions]:checked', '#radioBtnsForm').val()){
@@ -123,12 +123,17 @@ function createSequentialPalette() {
 
     var i;
     for (i = 0; i < numberOfColours; i++) {
-        palette += '<rect fill="' + color(10*i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+        resultPaletteDescription[i] = color(10 * i);
+        palette += '<rect fill="' + resultPaletteDescription[i] + '" width="15" height="15" y="' + i * 15 + '"></rect>';
     }
     palette += "</svg></div>";
     var divElement  = document.createElement('div');
     divElement.innerHTML = palette;
     $('#palette')[0].appendChild(divElement);
+
+    for (i = 0; i < numberOfColours; ++i) {
+        document.getElementById("description").innerHTML += resultPaletteDescription[i] + ', ' + '<br>';
+    }
 
     $('#paletteFrame').slideDown(1000);
 }
