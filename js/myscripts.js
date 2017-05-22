@@ -17,10 +17,10 @@ function submitBtnOnClick () {
             createSequentialPalette();
             break;
         case 'option2':
-
+            createDivergingPalette();
             break;
         case 'option3':
-
+            createQualitativePalette();
             break;
     }
 }
@@ -148,6 +148,44 @@ function createSequentialPalette() {
     var color = d3.scaleLinear()
         .domain([0, 10 * numberOfColours])
         .range([startColor, stopColor]);
+
+    var i;
+    for (i = 0; i < numberOfColours; i++) {
+        palette += '<rect fill="' + color(10*i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+    }
+    palette += "</svg></div>";
+    var divElement  = document.createElement('div');
+    divElement.innerHTML = palette;
+    $('#palette')[0].appendChild(divElement);
+
+    $('#paletteFrame').slideDown(1000);
+}
+
+function createQualitativePalette() {
+    var numberOfColours = $('#nOdataClasses').val();
+    var palette = "<div class=\"paletteSelection\"><svg width=\"15\" height=\"" + numberOfColours * 15 + "\">";
+
+
+    var color = d3.scaleOrdinal(d3.schemeAccent);
+
+    var i;
+    for (i = 0; i < numberOfColours; i++) {
+        palette += '<rect fill="' + color(10*i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+    }
+    palette += "</svg></div>";
+    var divElement  = document.createElement('div');
+    divElement.innerHTML = palette;
+    $('#palette')[0].appendChild(divElement);
+
+    $('#paletteFrame').slideDown(1000);
+}
+
+function createDivergingPalette() {
+    var numberOfColours = $('#nOdataClasses').val();
+    var palette = "<div class=\"paletteSelection\"><svg width=\"15\" height=\"" + numberOfColours * 15 + "\">";
+
+
+    var color = d3.scaleSequential(d3.interpolatePiYG);
 
     var i;
     for (i = 0; i < numberOfColours; i++) {
