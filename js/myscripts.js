@@ -11,10 +11,24 @@ $(function() {
 });
 
 
+function submitBtnOnClick () {
+    switch ($('input[name=inlineRadioOptions]:checked', '#radioBtnsForm').val()){
+        case 'option1':
+            createSequentialPalette();
+            break;
+        case 'option2':
+
+            break;
+        case 'option3':
+
+            break;
+    }
+}
+
 function getradio(){
 
     var x = $('input[name=inlineRadioOptions]:checked', '#radioBtnsForm').val();
-    if ( x.localeCompare('option3') == 0 ){
+    if ( x.localeCompare('option3') === 0 ){
 
         var n = 5;
         var i;
@@ -42,6 +56,14 @@ function getradio(){
         divElement.innerHTML = palette;
         $('#palette')[0].appendChild(divElement);
     }
+}
+
+var selectedSchema;
+
+function schemaSelection (index) {
+    $("#schema" + selectedSchema).css("background-color", "");
+    selectedSchema = index;
+    $('#schema' + index).css("background-color", "#9c9c9c");
 }
 
 var points = [];
@@ -97,3 +119,44 @@ $('#InputFile').ready(function () {
         $("#list").innerHTML = list;
     });
 });
+
+function createSequentialPalette() {
+    var numberOfColours = $('#nOdataClasses').val();
+    var palette = "<div class=\"paletteSelection\"><svg width=\"15\" height=\"" + numberOfColours * 15 + "\">";
+    var startColor = "white";
+    var stopColor="red";
+
+    switch (selectedSchema) {
+        case 1:
+            startColor = "white";
+            stopColor = "rgb(179,0,0)";
+            break;
+        case 2:
+            startColor = "white";
+            stopColor = "green";
+            break;
+        case 3:
+            startColor = "white";
+            stopColor = "darkblue";
+            break;
+        case 4:
+            startColor = 'rgb(255,255,178)';
+            stopColor = "rgb(179,0,0)";
+            break;
+    };
+
+    var color = d3.scaleLinear()
+        .domain([0, 10 * numberOfColours])
+        .range([startColor, stopColor]);
+
+    var i;
+    for (i = 0; i < numberOfColours; i++) {
+        palette += '<rect fill="' + color(10*i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+    }
+    palette += "</svg></div>";
+    var divElement  = document.createElement('div');
+    divElement.innerHTML = palette;
+    $('#palette')[0].appendChild(divElement);
+
+    $('#paletteFrame').slideDown(1000);
+}

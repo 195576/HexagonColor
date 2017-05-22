@@ -32,11 +32,13 @@
             </div>
             <div class="col-xs-3 col-md-2">
                 <select id="nOdataClasses" class="form-control">
-                    <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
                 </select>
             </div>
         </div>
@@ -58,6 +60,51 @@
                 </label>
                 </form>
             </div>
+        </div>
+
+        <div id="pickColorFrame" class="row frame">
+            <div class="col-md-12">
+                <label for="palette">Pick color schema:</label>
+            </div>
+            <div id="pickColor" class="col-md-12">
+                <div id="schema1" class="paletteSelection" onclick="schemaSelection(1)">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(254,240,217)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(253,204,138)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(252,141,89)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(227,74,51)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(179,0,0)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div id="schema2" class="paletteSelection" onclick="schemaSelection(2)">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(237,248,251)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(178,226,226)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(102,194,164)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(44,162,95)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(0,109,44)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div id="schema3" class="paletteSelection" onclick="schemaSelection(3)">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(241,238,246)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(189,201,225)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(116,169,207)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(43,140,190)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(4,90,141)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+                <div id="schema4" class="paletteSelection" onclick="schemaSelection(4)">
+                    <svg width="15" height="75">
+                        <rect fill="rgb(255,255,178)" width="15" height="15" y="0"></rect>
+                        <rect fill="rgb(254,204,92)" width="15" height="15" y="15"></rect>
+                        <rect fill="rgb(253,141,60)" width="15" height="15" y="30"></rect>
+                        <rect fill="rgb(240,59,32)" width="15" height="15" y="45"></rect>
+                        <rect fill="rgb(189,0,38)" width="15" height="15" y="60"></rect>
+                    </svg>
+                </div>
+            </div>
+            <div style="clear: both"></div>
         </div>
 
         <div id="paletteFrame" class="row frame">
@@ -112,8 +159,23 @@
                 <ul id="list"></ul>
             </div>
         </div>
+        <button class="btn btn-default" onclick='submitBtnOnClick()'>Click</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <!-- d3.scale  -->
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+
+    <!-- chroma.js -->
+    <script src="js/chroma.min.js"></script>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/myscripts.js"></script>
