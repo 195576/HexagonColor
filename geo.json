@@ -4,8 +4,9 @@
     {
       "type": "Feature",
       "properties": {
-        "weight": 0.005,
-		"test": "3213"
+        "weight": 0.002,
+		"text": "Ala",
+        "diverging": 1
       },
       "geometry": {
         "type": "Point",
@@ -19,7 +20,8 @@
       "type": "Feature",
       "properties": {
         "weight": 0.005,
-        "test": "32412"
+        "text": "Basia",
+        "diverging": 1
       },
       "geometry": {
         "type": "Point",
@@ -33,7 +35,8 @@
       "type": "Feature",
       "properties": {
         "weight": 0.0001,
-        "test": "522"
+        "text": "Kasia",
+        "diverging": 0
       },
       "geometry": {
         "type": "Point",
@@ -47,7 +50,8 @@
       "type": "Feature",
       "properties": {
         "weight": 0.0001,
-        "test": "1224"
+        "text": "Kasia",
+        "diverging": 0
       },
       "geometry": {
         "type": "Point",
@@ -61,7 +65,8 @@
       "type": "Feature",
       "properties": {
         "weight": 0.0001,
-        "test": "522"
+        "text": "Kasia",
+        "diverging": 1
       },
       "geometry": {
         "type": "Point",

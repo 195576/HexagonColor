@@ -2,14 +2,14 @@ $(function() {
 
     $('#paletteFrame').hide();
 
-    $('#inputSubmitBtn').click(function (evt){
-
-        evt.preventDefault();
-        $('#paletteFrame').slideDown(1000);
-        getradio();
-    });
+    // $('#inputSubmitBtn').click(function (evt){
+    //
+    //     evt.preventDefault();
+    //     $('#paletteFrame').slideDown(1000);
+    // });
 });
 
+var resultPaletteDescription = [];
 
 function submitBtnOnClick () {
     switch ($('input[name=inlineRadioOptions]:checked', '#radioBtnsForm').val()){
@@ -22,39 +22,6 @@ function submitBtnOnClick () {
         case 'option3':
             createQualitativePalette();
             break;
-    }
-}
-
-function getradio(){
-
-    var x = $('input[name=inlineRadioOptions]:checked', '#radioBtnsForm').val();
-    if ( x.localeCompare('option3') === 0 ){
-
-        var n = 5;
-        var i;
-        var colorR = [];
-        var colorG = [];
-        var colorB = [];
-        for (i = 0; i < n; i++){
-            colorR[i] = parseInt(Math.random() * 255);
-            colorG[i] = parseInt(Math.random() * 255);
-            colorB[i] = parseInt(Math.random() * 255);
-        }
-
-        var idArray = ["aa", "bb", "cc", "dd", "ee"];
-        for (i = 0; i < n; i++) {
-            $('#' + idArray[i]).attr("fill", "rgb(" + colorR[i] + "," + colorG[i] + "," + colorB[i] + ")");
-        }
-
-        var palette = "<div class=\"paletteSelection\"><svg width=\"15\" height=\"75\">";
-
-        for (i = 0; i < n; i++){
-            palette += '<rect fill="rgb(' + colorR[i] + ',' + colorG[i] + ',' + colorB[i] + ')" width="15" height="15" y="' + i * 15 + '"></rect>'
-        }
-        palette += "</svg></div>";
-        var divElement  = document.createElement('div');
-        divElement.innerHTML = palette;
-        $('#palette')[0].appendChild(divElement);
     }
 }
 
@@ -72,51 +39,56 @@ $('#InputFile').ready(function () {
     d3.json("geo.json", function (error, data) {
         nodes = data.features;
 
-        var propertiesArray = [];
+        // Stare ładowanie plików json
 
-        var li, i, noFeatures,
-        list = document.getElementById("list");
-        noFeatures = data.features.length;
+        // var propertiesArray = [];
+        //
+        // var li, i, noFeatures,
+        // list = document.getElementById("list");
+        // noFeatures = data.features.length;
+        //
+        // var feature, property, numberOfProperties;
+        // numberOfProperties = 0;
+        //
+        // feature = data.features[0].properties;
+        // for (property in feature) {
+        //     if (feature.hasOwnProperty(property)) {
+        //         numberOfProperties++;
+        //     }
+        // }
+        //
+        // for (i = 0; i < noFeatures; i++) {
+        //     feature = data.features[i].properties;
+        //     for (property in feature) {
+        //         if (feature.hasOwnProperty(property)) {
+        //             // numberOfProperties++;
+        //             propertiesArray.push(feature[property]);
+        //             console.log(feature[property]);
+        //         }
+        //     }
+        // }
 
-        var feature, property, numberOfProperties;
-        numberOfProperties = 0;
+        document.getElementById('numberOfFeatures').innerHTML = 'There are ' + data.features.length + ' features in this file.';
 
-        feature = data.features[0].properties;
-        for (property in feature) {
-            if (feature.hasOwnProperty(property)) {
-                numberOfProperties++;
-            }
-        }
+        loadDataFromFile(data);
 
-        for (i = 0; i < noFeatures; i++) {
-            feature = data.features[i].properties;
-            for (property in feature) {
-                if (feature.hasOwnProperty(property)) {
-                    // numberOfProperties++;
-                    propertiesArray.push(feature[property]);
-                    console.log(feature[property]);
-                }
-            }
-        }
 
-        document.getElementById('numberOfProperties').innerHTML = numberOfProperties;
-
-        var liProperty, ul;
-        for (i = 0; i< propertiesArray.length; i++) {
-            li = document.createElement("li");
-            li.innerHTML = i + 1;
-
-            ul = document.createElement("ul");
-
-            liProperty = document.createElement("li");
-            liProperty.innerHTML = propertiesArray[i];
-
-            ul.appendChild(liProperty);
-            li.appendChild(ul);
-            list.appendChild(li);
-        }
+        // var liProperty, ul;
+        // for (i = 0; i< propertiesArray.length; i++) {
+        //     li = document.createElement("li");
+        //     li.innerHTML = i + 1;
+        //
+        //     ul = document.createElement("ul");
+        //
+        //     liProperty = document.createElement("li");
+        //     liProperty.innerHTML = propertiesArray[i];
+        //
+        //     ul.appendChild(liProperty);
+        //     li.appendChild(ul);
+        //     list.appendChild(li);
+        // }
         //document.body.appendChild(list);
-        $("#list").innerHTML = list;
+        // $("#list").innerHTML = list;
     });
 });
 
@@ -151,12 +123,17 @@ function createSequentialPalette() {
 
     var i;
     for (i = 0; i < numberOfColours; i++) {
-        palette += '<rect fill="' + color(10*i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+        resultPaletteDescription[i] = color(10 * i);
+        palette += '<rect fill="' + resultPaletteDescription[i] + '" width="15" height="15" y="' + i * 15 + '"></rect>';
     }
     palette += "</svg></div>";
     var divElement  = document.createElement('div');
     divElement.innerHTML = palette;
     $('#palette')[0].appendChild(divElement);
+
+    for (i = 0; i < numberOfColours; ++i) {
+        document.getElementById("description").innerHTML += resultPaletteDescription[i] + ', ' + '<br>';
+    }
 
     $('#paletteFrame').slideDown(1000);
 }
@@ -197,4 +174,44 @@ function createDivergingPalette() {
     $('#palette')[0].appendChild(divElement);
 
     $('#paletteFrame').slideDown(1000);
+
+function loadDataFromFile (data) {
+
+    var propertyKeys = Object.keys(data.features[0].properties);
+    var ret = propertyKeys.map(function(key){
+        return data.features.map(function(feature){ return feature.properties[key]});
+    });
+    var tb = document.querySelector("#summary");
+    var tbody = tb.querySelector("tbody");
+    tbody.innerHTML = "";
+    ret.forEach(function (v, i) {
+        var row = document.createElement("tr");
+        var uniq = _.uniq(v).length === v.length;
+        var type = _.uniq(v.map(function(x){return typeof x}));
+        var first3 = _.uniq(v).slice(0, 3);
+        var min, max, avg, tot, count;
+        if (type.length == 1 && type[0] == "number") {
+            min = _.min(v);
+            max = _.max(v);
+            tot = _.sum(v).toFixed(4);
+            count = v.length;
+            avg = (tot/count).toFixed(4);
+        }
+        var results = [propertyKeys[i], first3.join(", "), uniq, type.join(", "), min, avg, max];
+        var classes = ["property", "first3", "unique", "types", "min", "avg", "max"];
+        results.forEach(function(r, j){
+            var cell = document.createElement("td");
+            cell.classList.add(classes[j]);
+            cell.innerHTML = r === undefined ? "-":r.toString();
+            row.appendChild(cell);
+        });
+        if (uniq && type.length === 1) {
+            if (type[0] === "number")
+                row.classList.add("highlight1");
+            else
+                row.classList.add("highlight2");
+        }
+        tbody.appendChild(row);
+    });
+
 }

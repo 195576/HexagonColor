@@ -36,3 +36,28 @@ svg{
 #nOdataClasses:hover{
     cursor: pointer;
 }
+
+#summary thead td {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#summary td{
+    border: solid 1px;
+    border-collapse: collapse;
+    border-spacing: 0.5rem;
+}
+
+.min, .avg, .max {
+    text-align: right;
+}
+
+#drop {
+    min-height: 150px;
+    width: 90%;
+    border: 3px dashed blue;
+    margin: 5%;
+    padding: 10px;
+    font-weight: bold;
+    font-size: medium;
+}
