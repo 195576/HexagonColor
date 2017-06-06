@@ -1,13 +1,7 @@
 $(function () {
-
     $('#paletteFrame').hide();
     $('#pickColorFrame').hide();
     $('#afterSelection').hide();
-    // $('#inputSubmitBtn').click(function (evt){
-    //
-    //     evt.preventDefault();
-    //     $('#paletteFrame').slideDown(1000);
-    // });
 });
 
 function showSchemas() {
@@ -42,63 +36,14 @@ function schemaSelection(index) {
     $('#schema' + index).css("background-color", "#9c9c9c");
 }
 
-var points = [];
 var featuresCounter;
 
 $('#InputFile').ready(function () {
     d3.json("geo.json", function (error, data) {
         nodes = data.features;
-
-        // Stare ładowanie plików json
-
-        // var propertiesArray = [];
-        //
-        // var li, i, noFeatures,
-        // list = document.getElementById("list");
-        // noFeatures = data.features.length;
-        //
-        // var feature, property, numberOfProperties;
-        // numberOfProperties = 0;
-        //
-        // feature = data.features[0].properties;
-        // for (property in feature) {
-        //     if (feature.hasOwnProperty(property)) {
-        //         numberOfProperties++;
-        //     }
-        // }
-        //
-        // for (i = 0; i < noFeatures; i++) {
-        //     feature = data.features[i].properties;
-        //     for (property in feature) {
-        //         if (feature.hasOwnProperty(property)) {
-        //             // numberOfProperties++;
-        //             propertiesArray.push(feature[property]);
-        //             console.log(feature[property]);
-        //         }
-        //     }
-        // }
         featuresCounter = data.features.length;
         document.getElementById('numberOfFeatures').innerHTML = 'There are ' + data.features.length + ' features in this file.';
-
         loadDataFromFile(data);
-
-
-        // var liProperty, ul;
-        // for (i = 0; i< propertiesArray.length; i++) {
-        //     li = document.createElement("li");
-        //     li.innerHTML = i + 1;
-        //
-        //     ul = document.createElement("ul");
-        //
-        //     liProperty = document.createElement("li");
-        //     liProperty.innerHTML = propertiesArray[i];
-        //
-        //     ul.appendChild(liProperty);
-        //     li.appendChild(ul);
-        //     list.appendChild(li);
-        // }
-        //document.body.appendChild(list);
-        // $("#list").innerHTML = list;
     });
 });
 
