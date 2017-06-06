@@ -6,7 +6,7 @@
       "properties": {
         "weight": 0.002,
 		"text": "Ala",
-        "diverging": 1
+        "unique": 1
       },
       "geometry": {
         "type": "Point",
@@ -21,7 +21,7 @@
       "properties": {
         "weight": 0.005,
         "text": "Basia",
-        "diverging": 1
+        "unique": 2
       },
       "geometry": {
         "type": "Point",
@@ -35,8 +35,8 @@
       "type": "Feature",
       "properties": {
         "weight": 0.0001,
-        "text": "Kasia",
-        "diverging": 0
+        "text": "Jaś",
+        "unique": 3
       },
       "geometry": {
         "type": "Point",
@@ -50,8 +50,8 @@
       "type": "Feature",
       "properties": {
         "weight": 0.0001,
-        "text": "Kasia",
-        "diverging": 0
+        "text": "Jaś",
+        "unique": 4
       },
       "geometry": {
         "type": "Point",
@@ -65,8 +65,114 @@
       "type": "Feature",
       "properties": {
         "weight": 0.0001,
-        "text": "Kasia",
-        "diverging": 1
+        "text": "Jaś",
+        "unique": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.450886249542236,
+          51.7528386886273
+        ]
+      }
+    },
+
+    {
+    "type": "Feature",
+    "properties": {
+      "weight": 0.002,
+      "text": "Ala",
+      "unique": 6
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        19.456121921539303,
+        51.753097715746094
+      ]
+    }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "weight": 0.005,
+        "text": "Basia",
+        "unique": 7
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.45425510406494,
+          51.75292503116529
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "weight": 0.0001,
+        "text": "Jaś",
+        "unique": 8
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.456690549850464,
+          51.75151032108448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "weight": 0.0001,
+        "text": "Jaś",
+        "unique": 9
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.45349335670471,
+          51.75179592340317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "weight": 0.0001,
+        "text": "Jaś",
+        "unique": 10
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.450886249542236,
+          51.7528386886273
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "weight": 0.0001,
+        "text": "Jaś",
+        "unique": 11
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.45349335670471,
+          51.75179592340317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "weight": 0.0001,
+        "text": "Jaś",
+        "unique": 12
       },
       "geometry": {
         "type": "Point",
