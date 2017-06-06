@@ -1,28 +1,30 @@
-body, head{
+body, head {
     margin: 0;
 }
 
-body{
-    background-color: #404040;
-    color: white;;
+body {
 }
 
-.frame{
+.modal-dialog {
+    height: 900px;
+    width: 602px;
+}
+
+.frame {
     margin-top: 20px;
     border: 1px solid;
     border-radius: 5px;
     padding: 5px;
 }
 
-.paletteSelection{
+.paletteSelection {
     float: left;
     width: 25px;
     height: 85px;
-    /*margin-right: 15px;*/
     text-align: center;
 }
 
-svg{
+svg {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -33,7 +35,7 @@ svg{
     cursor: pointer;
 }
 
-#nOdataClasses:hover{
+#nOdataClasses:hover {
     cursor: pointer;
 }
 
@@ -42,7 +44,7 @@ svg{
     text-transform: uppercase;
 }
 
-#summary td{
+#summary td {
     border: solid 1px;
     border-collapse: collapse;
     border-spacing: 0.5rem;
@@ -60,4 +62,13 @@ svg{
     padding: 10px;
     font-weight: bold;
     font-size: medium;
+}
+
+tbody tr:hover {
+    background-color: gainsboro;
+    cursor: pointer;
+}
+
+#generatePaletteBtn {
+    margin-left: 12px;
 }
