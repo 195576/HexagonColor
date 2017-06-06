@@ -97,14 +97,25 @@ function createSequentialPalette() {
 function createQualitativePalette() {
     $('#palette').html("");
     var numberOfColours = $('#nOdataClasses').val();
-    var palette = "<div class=\"paletteSelection\"><svg width=\"15\" height=\"" + numberOfColours * 15 + "\">";
+    var palette = "<div><svg height=\"25\" width=\"" + numberOfColours * 25 + "\">";
 
+    var color1 = d3.schemeAccent; // 8
+    var color2 = d3.schemeSet1; // 9, ale OK
+    var color3 = d3.schemeDark2 ; // 8
+    var color4 = d3.schemePaired ; // 12
+    var color5 = d3.schemeSet3; // 12
 
-    var color = d3.scaleOrdinal(d3.schemeAccent);
+    var colorsArray = [color1, color2, color3, color4, color5];
+
+    var randomlyChosenPalette = colorsArray[Math.floor(Math.random() * (4 + 1))];
+
+    if (randomlyChosenPalette.length === 8){
+        randomlyChosenPalette.push('rgb(214,12,12)');
+    }
 
     var i;
     for (i = 0; i < numberOfColours; i++) {
-        palette += '<rect fill="' + color(10 * i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+        palette += '<rect fill="' + randomlyChosenPalette[i] + '" width="25" height="25" x="' + i * 25 + '"></rect>';
     }
     palette += "</svg></div>";
     var divElement = document.createElement('div');
@@ -117,14 +128,29 @@ function createQualitativePalette() {
 function createDivergingPalette() {
     $('#palette').html("");
     var numberOfColours = $('#nOdataClasses').val();
-    var palette = "<div class=\"paletteSelection\"><svg width=\"15\" height=\"" + numberOfColours * 15 + "\">";
 
+    var palette = "<div><svg height=\"25\" width=\"" + numberOfColours * 25 + "\">";
 
-    var color = d3.scaleSequential(d3.interpolatePiYG);
+    var color1 = [];
+    var color2 = [];
+    var color3 = [];
+    var color4 = [];
+
+    var inverse = 1 / numberOfColours;
+    for (i = 0; i < numberOfColours ; i += inverse) {
+        color1.push(d3.interpolateBrBG(i));
+        color2.push(d3.interpolateRdYlGn(i));
+        color3.push(d3.interpolateSpectral(i));
+        color4.push(d3.interpolatePiYG(i));
+    }
+
+    var colorsArray = [color1, color2, color3, color4];
+
+    var randomlyChosenPalette = colorsArray[Math.floor(Math.random() * (3 + 1))];
 
     var i;
     for (i = 0; i < numberOfColours; i++) {
-        palette += '<rect fill="' + color(10 * i) + '" width="15" height="15" y="' + i * 15 + '"></rect>';
+        palette += '<rect fill="' + randomlyChosenPalette[i] + '" width="25" height="25" x="' + i * 25 + '"></rect>';
     }
     palette += "</svg></div>";
     var divElement = document.createElement('div');
@@ -160,8 +186,9 @@ function loadDataFromFile(data) {
             count = v.length;
             avg = (tot / count).toFixed(4);
         }
+        row.id = "row" + i;
         row.onclick = function () {
-            onTableRowSelect(row);
+            onTableRowSelect(row, i);
         };
         var results = [propertyKeys[i], first3.join(", "), uniq, type.join(", "), min, avg, max, count];
         var classes = ["property", "first3", "unique", "types", "min", "avg", "max", "count"];
@@ -181,7 +208,13 @@ function loadDataFromFile(data) {
     });
 }
 
-var onTableRowSelect = function (row) {
+var selectedRow;
+
+var onTableRowSelect = function (row, index) {
+    $("#row" + selectedRow).css("background-color", "");
+    selectedRow= index;
+    $('#row' + index).css("background-color", "#0098BA");
+
     $('#inlineRadio1').attr('checked', false);
     $('#inlineRadio2').attr('checked', false);
     $('#inlineRadio3').attr('checked', false);
