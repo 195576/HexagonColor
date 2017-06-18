@@ -60,7 +60,7 @@
                                 <label for="nOdataClasses">Number of data classes: </label>
                             </div>
                             <div class="col-xs-3 col-md-2">
-                                <select id="nOdataClasses" class="form-control">
+                                <select id="nOdataClasses" class="form-control" onchange="$('#paletteFrame').slideUp(500);">
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -79,7 +79,7 @@
                                 <label style="margin-right: 10px;">Nature of your data:</label>
                             </div>
                             <div class="col-xs-12 col-md-8">
-                                <form id="radioBtnsForm">
+                                <form id="radioBtnsForm" onchange="$('#paletteFrame').slideUp(500);">
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
                                                onclick="showSchemas()"> sequential
@@ -156,6 +156,10 @@
                     <button id="generatePaletteBtn" type="button" class="btn btn-info" onclick='submitBtnOnClick()'>
                         Generate palette
                     </button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default" onclick="serialize()">Serialize</button>
+                    <pre id="preId" name="preId"></pre>
                 </div>
                 <div class="modal-footer text-right">
                     <div class='form-group'>

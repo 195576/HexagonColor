@@ -44,12 +44,6 @@ svg {
     text-transform: uppercase;
 }
 
-#summary td {
-    border: solid 1px;
-    border-collapse: collapse;
-    border-spacing: 0.5rem;
-}
-
 .min, .avg, .max {
     text-align: right;
 }
