@@ -20,5 +20,6 @@
     <orderEntry type="library" name="d3-time-format.v2" level="application" />
     <orderEntry type="library" name="d3-scale.v1" level="application" />
     <orderEntry type="library" name="chroma" level="application" />
+    <orderEntry type="library" name="Knockout 3.4.2" level="project" />
   </component>
 </module>

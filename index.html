@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
 
     <script src="js/jquery-3.2.0.min.js"></script>
 </head>
@@ -19,7 +20,7 @@
     <br>
     <br>
     <br>
-    <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#colorBrewerModal">
+    Choose option:<button type="button" data-bind="click: incrementClickCounter" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#colorBrewerModal">
         Color Brewer
     </button>
     <div id="colorBrewerModal" class="modal fade" role="dialog">
@@ -168,6 +169,18 @@
         </div>
     </div>
 
+    <script>
+        var viewModel = function() {
+            numberOfClicks: ko.observable(0),
+                incrementClickCounter=
+            function () {
+                var previousCount = this.numberOfClicks();
+                this.numberOfClicks(previousCount + 1);
+            }
+        }
+        }
+        ko.applyBindings(new viewModel())
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.8/d3.min.js"></script>
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
