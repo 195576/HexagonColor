@@ -28,6 +28,19 @@ function submitBtnOnClick() {
     }
 }
 
+var toJson = function () {
+    return JSON.stringify({
+        selectedRow: selectedRow,
+        numberOfDataClasses: $('#nOdataClasses').val(),
+        natureOfData: $('input[name=inlineRadioOptions]:checked', '#radioBtnsForm').val(),
+        selectedSchema: this.selectedSchema
+    });
+};
+
+var serialize = function () {
+    $('#preId').html(toJson());
+};
+
 var selectedSchema;
 
 function schemaSelection(index) {
@@ -65,7 +78,7 @@ function createSequentialPalette() {
             break;
         case 3:
             startColor = "white";
-            stopColor = "darkblue";
+            stopColor = "rgb(4,90,141)";
             break;
         case 4:
             startColor = 'rgb(255,255,178)';
@@ -101,15 +114,15 @@ function createQualitativePalette() {
 
     var color1 = d3.schemeAccent; // 8
     var color2 = d3.schemeSet1; // 9, ale OK
-    var color3 = d3.schemeDark2 ; // 8
-    var color4 = d3.schemePaired ; // 12
+    var color3 = d3.schemeDark2; // 8
+    var color4 = d3.schemePaired; // 12
     var color5 = d3.schemeSet3; // 12
 
     var colorsArray = [color1, color2, color3, color4, color5];
 
     var randomlyChosenPalette = colorsArray[Math.floor(Math.random() * (4 + 1))];
 
-    if (randomlyChosenPalette.length === 8){
+    if (randomlyChosenPalette.length === 8) {
         randomlyChosenPalette.push('rgb(214,12,12)');
     }
 
@@ -137,7 +150,7 @@ function createDivergingPalette() {
     var color4 = [];
 
     var inverse = 1 / numberOfColours;
-    for (i = 0; i < numberOfColours ; i += inverse) {
+    for (i = 0; i < numberOfColours; i += inverse) {
         color1.push(d3.interpolateBrBG(i));
         color2.push(d3.interpolateRdYlGn(i));
         color3.push(d3.interpolateSpectral(i));
@@ -211,8 +224,9 @@ function loadDataFromFile(data) {
 var selectedRow;
 
 var onTableRowSelect = function (row, index) {
+
     $("#row" + selectedRow).css("background-color", "");
-    selectedRow= index;
+    selectedRow = index;
     $('#row' + index).css("background-color", "#0098BA");
 
     $('#inlineRadio1').attr('checked', false);
@@ -246,3 +260,5 @@ var onTableRowSelect = function (row, index) {
     }
     $('#afterSelection').slideDown(500);
 };
+
+//
