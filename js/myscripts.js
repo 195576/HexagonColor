@@ -2,6 +2,7 @@ $(function () {
     $('#paletteFrame').hide();
     $('#pickColorFrame').hide();
     $('#afterSelection').hide();
+    $('#schemaPickerForQualitative').hide();
 });
 
 function showSchemas() {
@@ -74,7 +75,7 @@ function createSequentialPalette() {
             break;
         case 2:
             startColor = "white";
-            stopColor = "green";
+            stopColor = "rgb(0,109,44)";
             break;
         case 3:
             startColor = "white";
@@ -107,10 +108,9 @@ function createSequentialPalette() {
     $('#paletteFrame').slideDown(1000);
 }
 
-function createQualitativePalette() {
-    $('#palette').html("");
-    var numberOfColours = $('#nOdataClasses').val();
-    var palette = "<div><svg height=\"25\" width=\"" + numberOfColours * 25 + "\">";
+function schemaPickForQualitative() {
+    hideSchemas();
+    var palette = "<div><svg height=\"75\" width=\"15\">";
 
     var color1 = d3.schemeAccent; // 8
     var color2 = d3.schemeSet1; // 9, ale OK
@@ -120,23 +120,60 @@ function createQualitativePalette() {
 
     var colorsArray = [color1, color2, color3, color4, color5];
 
-    var randomlyChosenPalette = colorsArray[Math.floor(Math.random() * (4 + 1))];
+    // var randomlyChosenPalette = colorsArray[Math.floor(Math.random() * (4 + 1))];
 
-    if (randomlyChosenPalette.length === 8) {
-        randomlyChosenPalette.push('rgb(214,12,12)');
+    // if (randomlyChosenPalette.length === 8) {
+    //     randomlyChosenPalette.push('rgb(214,12,12)');
+    // }
+
+    var i,j;
+    var tmp = [];
+    for (i = 0; i < colorsArray.length; i++) {
+        tmp = colorsArray[i];
+        for (j = 0; j < 5; j++) {
+            palette += '<rect fill="' + tmp[j] + '" width="15" height="15" y="' + j * 15 + '"></rect>';
+        }
+        palette += "</svg></div>";
+        var divElement = document.createElement('div');
+        divElement.innerHTML = palette;
+        divElement.classList.add('paletteSelection');
+        $('#qualitativeSchemas')[0].appendChild(divElement);
     }
 
-    var i;
-    for (i = 0; i < numberOfColours; i++) {
-        palette += '<rect fill="' + randomlyChosenPalette[i] + '" width="25" height="25" x="' + i * 25 + '"></rect>';
-    }
-    palette += "</svg></div>";
-    var divElement = document.createElement('div');
-    divElement.innerHTML = palette;
-    $('#palette')[0].appendChild(divElement);
 
-    $('#paletteFrame').slideDown(1000);
+    $('#schemaPickerForQualitative').slideDown(1000);
 }
+
+// function createQualitativePalette() {
+//     $('#palette').html("");
+//     var numberOfColours = $('#nOdataClasses').val();
+//     var palette = "<div><svg height=\"25\" width=\"" + numberOfColours * 25 + "\">";
+//
+//     var color1 = d3.schemeAccent; // 8
+//     var color2 = d3.schemeSet1; // 9, ale OK
+//     var color3 = d3.schemeDark2; // 8
+//     var color4 = d3.schemePaired; // 12
+//     var color5 = d3.schemeSet3; // 12
+//
+//     var colorsArray = [color1, color2, color3, color4, color5];
+//
+//     var randomlyChosenPalette = colorsArray[Math.floor(Math.random() * (4 + 1))];
+//
+//     if (randomlyChosenPalette.length === 8) {
+//         randomlyChosenPalette.push('rgb(214,12,12)');
+//     }
+//
+//     var i;
+//     for (i = 0; i < numberOfColours; i++) {
+//         palette += '<rect fill="' + randomlyChosenPalette[i] + '" width="25" height="25" x="' + i * 25 + '"></rect>';
+//     }
+//     palette += "</svg></div>";
+//     var divElement = document.createElement('div');
+//     divElement.innerHTML = palette;
+//     $('#palette')[0].appendChild(divElement);
+//
+//     $('#paletteFrame').slideDown(1000);
+// }
 
 function createDivergingPalette() {
     $('#palette').html("");

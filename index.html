@@ -60,7 +60,8 @@
                                 <label for="nOdataClasses">Number of data classes: </label>
                             </div>
                             <div class="col-xs-3 col-md-2">
-                                <select id="nOdataClasses" class="form-control" onchange="$('#paletteFrame').slideUp(500);">
+                                <select id="nOdataClasses" class="form-control"
+                                        onchange="$('#paletteFrame').slideUp(500);">
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -90,9 +91,17 @@
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"
-                                               onclick="hideSchemas()"> qualitative
+                                               onclick="schemaPickForQualitative()"> qualitative
                                     </label>
                                 </form>
+                            </div>
+                        </div>
+                        <div id="schemaPickerForQualitative" class="row">
+                            <div class="col-md-12">
+                                <label for="palette">Pick color schema:</label>
+                            </div>
+                            <div id="qualitativeSchemas" class="col-md-12">
+
                             </div>
                         </div>
 
