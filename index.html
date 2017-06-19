@@ -11,10 +11,51 @@
     <script src="https://d3js.org/d3.v3.min.js"></script>
 
     <script src="js/jquery-3.2.0.min.js"></script>
+
+
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
+        <style>
+            #map {
+                width: 600px;
+                height: 400px;
+            }
+        </style>
+        <script>
+            var geojson = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"id":1,"category":"A"},"geometry":{"type":"Polygon","coordinates":[[[19.45549964904785,51.75411388471214],[19.455623030662537,51.753555990855425],[19.455923438072205,51.75359251983071],[19.455880522727963,51.75379508906648],[19.456223845481873,51.75382829705122],[19.45627212524414,51.75354934922037],[19.456583261489868,51.75356927412257],[19.456422328948975,51.75419358327193],[19.456121921539303,51.754167017100954],[19.456159472465515,51.75402422366426],[19.45582687854767,51.75398769503814],[19.455794692039486,51.754130488590356],[19.45549964904785,51.75411388471214]]]}},{"type":"Feature","properties":{"id":2,"category":"A"},"geometry":{"type":"Polygon","coordinates":[[[19.455547928810116,51.75341319548676],[19.455692768096924,51.75279883816947],[19.45599853992462,51.75281876340277],[19.455966353416443,51.75296156065092],[19.45630431175232,51.752994769248566],[19.45632576942444,51.75286193471146],[19.456642270088196,51.75286525557965],[19.456492066383362,51.753423157969],[19.456406235694885,51.75340987465886],[19.456390142440796,51.75346632869995],[19.456202387809753,51.753453045402495],[19.45626139640808,51.75318405778888],[19.455918073654175,51.7531442076358],[19.455848336219788,51.753436441275234],[19.455547928810116,51.75341319548676]]]}},{"type":"Feature","properties":{"id":3,"category":"A"},"geometry":{"type":"Polygon","coordinates":[[[19.455649852752686,51.753552670038026],[19.455676674842834,51.753492895283095],[19.455934166908264,51.75350617856881],[19.455912709236145,51.75356927412257],[19.455649852752686,51.753552670038026]]]}},{"type":"Feature","properties":{"id":4,"category":"B"},"geometry":{"type":"Polygon","coordinates":[[[19.456116557121277,51.75423675326643],[19.456089735031128,51.754352979969575],[19.456197023391724,51.75435630072812],[19.456363320350647,51.7543629422445],[19.456352591514587,51.75443267810744],[19.45581078529358,51.75437954603114],[19.45580542087555,51.75434301769244],[19.455859065055847,51.754346338451754],[19.455880522727963,51.754216828658706],[19.456116557121277,51.75423675326643]]]}},{"type":"Feature","properties":{"id":5,"category":"C"},"geometry":{"type":"Polygon","coordinates":[[[19.455231428146362,51.75433969693293],[19.45524752140045,51.754190262501425],[19.45546746253967,51.75420686635157],[19.455440640449524,51.75427660245548],[19.455381631851193,51.75428324398358],[19.455392360687256,51.75431977237062],[19.455424547195435,51.75431977237062],[19.455419182777405,51.754346338451754],[19.455231428146362,51.75433969693293]]]}},{"type":"Feature","properties":{"id":6,"category":"D"},"geometry":{"type":"Polygon","coordinates":[[[19.455177783966064,51.75451569685147],[19.455226063728333,51.75433969693293],[19.455413818359375,51.754352979969575],[19.455381631851193,51.75451569685147],[19.455177783966064,51.75451569685147]]]}}]};
+        </script>
+
 </head>
 <body>
 <div class="container">
 
+    <div id="map"></div>
+    <script>
+
+        function getColor(feature) {
+            switch (feature.properties.category) {
+                case 'A':
+                    return "#0000ff";
+                case 'B':
+                    return '#ffff00';
+                case 'C':
+                    return '#fff000';
+                default:
+                    return '#fff';
+            }
+        }
+
+        var map = L.map('map').setView([51.75347297034721, 19.456089735031128], 17);
+        L.geoJSON(geojson, {
+            style: function (feature) {
+                return {
+                    fillColor: getColor(feature),
+                    color: getColor(feature)
+                }
+            }
+        }).addTo(map);
+    </script>
     <br>
     <br>
     <br>
@@ -83,15 +124,15 @@
                                 <form id="radioBtnsForm" onchange="$('#paletteFrame').slideUp(500);">
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-                                               onclick="showSchemas()"> sequential
+                                               onclick="sequentialOnChoose()"> sequential
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-                                               onclick="hideSchemas()"> diverging
+                                               onclick="divergingOnChoose()"> diverging
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"
-                                               onclick="schemaPickForQualitative()"> qualitative
+                                               onclick="qualitativeOnChoose()"> qualitative
                                     </label>
                                 </form>
                             </div>
@@ -101,10 +142,111 @@
                                 <label for="palette">Pick color schema:</label>
                             </div>
                             <div id="qualitativeSchemas" class="col-md-12">
-
+                                <div id="qualitativeSchema1" class="paletteSelection"
+                                     onclick="qualitativeSchemaSelection(1)">
+                                    <svg height="75" width="15">
+                                        <rect fill="#7fc97f" width="15" height="15" y="0"></rect>
+                                        <rect fill="#beaed4" width="15" height="15" y="15"></rect>
+                                        <rect fill="#fdc086" width="15" height="15" y="30"></rect>
+                                        <rect fill="#ffff99" width="15" height="15" y="45"></rect>
+                                        <rect fill="#386cb0" width="15" height="15" y="60"></rect>
+                                    </svg>
+                                </div>
+                                <div id="qualitativeSchema2" class="paletteSelection"
+                                     onclick="qualitativeSchemaSelection(2)">
+                                    <svg height="75" width="15">
+                                        <rect fill="#e41a1c" width="15" height="15" y="0"></rect>
+                                        <rect fill="#377eb8" width="15" height="15" y="15"></rect>
+                                        <rect fill="#4daf4a" width="15" height="15" y="30"></rect>
+                                        <rect fill="#984ea3" width="15" height="15" y="45"></rect>
+                                        <rect fill="#ff7f00" width="15" height="15" y="60"></rect>
+                                    </svg>
+                                </div>
+                                <div id="qualitativeSchema3" class="paletteSelection"
+                                     onclick="qualitativeSchemaSelection(3)">
+                                    <svg height="75" width="15">
+                                        <rect fill="#1b9e77" width="15" height="15" y="0"></rect>
+                                        <rect fill="#d95f02" width="15" height="15" y="15"></rect>
+                                        <rect fill="#7570b3" width="15" height="15" y="30"></rect>
+                                        <rect fill="#e7298a" width="15" height="15" y="45"></rect>
+                                        <rect fill="#66a61e" width="15" height="15" y="60"></rect>
+                                    </svg>
+                                </div>
+                                <div id="qualitativeSchema4" class="paletteSelection"
+                                     onclick="qualitativeSchemaSelection(4)">
+                                    <svg height="75" width="15">
+                                        <rect fill="#a6cee3" width="15" height="15" y="0"></rect>
+                                        <rect fill="#1f78b4" width="15" height="15" y="15"></rect>
+                                        <rect fill="#b2df8a" width="15" height="15" y="30"></rect>
+                                        <rect fill="#33a02c" width="15" height="15" y="45"></rect>
+                                        <rect fill="#fb9a99" width="15" height="15" y="60"></rect>
+                                    </svg>
+                                </div>
+                                <div id="qualitativeSchema5" class="paletteSelection"
+                                     onclick="qualitativeSchemaSelection(5)">
+                                    <svg height="75" width="15">
+                                        <rect fill="#8dd3c7" width="15" height="15" y="0"></rect>
+                                        <rect fill="#ffffb3" width="15" height="15" y="15"></rect>
+                                        <rect fill="#bebada" width="15" height="15" y="30"></rect>
+                                        <rect fill="#fb8072" width="15" height="15" y="45"></rect>
+                                        <rect fill="#80b1d3" width="15" height="15" y="60"></rect>
+                                    </svg>
+                                </div>
                             </div>
+                            <div style="clear: both"></div>
                         </div>
-
+                        <div id="schemaPickerForDiverging" class="row">
+                            <div class="col-md-12">
+                                <label for="palette">Pick color schema:</label>
+                            </div>
+                            <div id="divergingSchemas" class="col-md-12">
+                                <div id="divergingSchema1" class="paletteSelection"
+                                     onclick="divergingSchemaSelection(1)">
+                                    <svg height="90" width="15">
+                                        <rect fill="rgb(240, 112, 74)" width="15" height="15" y="0"></rect>
+                                        <rect fill="rgb(252, 172, 99)" width="15" height="15" y="15"></rect>
+                                        <rect fill="rgb(251, 248, 176)" width="15" height="15" y="30"></rect>
+                                        <rect fill="rgb(169, 221, 162)" width="15" height="15" y="45"></rect>
+                                        <rect fill="rgb(105, 189, 169)" width="15" height="15" y="60"></rect>
+                                        <rect fill="rgb(66, 136, 181)" width="15" height="15" y="75"></rect>
+                                    </svg>
+                                </div>
+                                <div id="divergingSchema2" class="paletteSelection"
+                                     onclick="divergingSchemaSelection(2)">
+                                    <svg height="90" width="15">
+                                        <rect fill="rgb(142, 1, 82)" width="15" height="15" y="0"></rect>
+                                        <rect fill="rgb(213, 87, 157)" width="15" height="15" y="15"></rect>
+                                        <rect fill="rgb(245, 243, 239)" width="15" height="15" y="30"></rect>
+                                        <rect fill="rgb(199, 231, 159)" width="15" height="15" y="45"></rect>
+                                        <rect fill="rgb(111, 174, 56)" width="15" height="15" y="60"></rect>
+                                        <rect fill="rgb(60, 167, 88)" width="15" height="15" y="75"></rect>
+                                    </svg>
+                                </div>
+                                <div id="divergingSchema3" class="paletteSelection"
+                                     onclick="divergingSchemaSelection(3)">
+                                    <svg height="90" width="15">
+                                        <rect fill="rgb(165, 0, 38)" width="15" height="15" y="0"></rect>
+                                        <rect fill="rgb(227, 75, 52)" width="15" height="15" y="15"></rect>
+                                        <rect fill="rgb(254, 232, 154)" width="15" height="15" y="30"></rect>
+                                        <rect fill="rgb(227, 243, 155)" width="15" height="15" y="45"></rect>
+                                        <rect fill="rgb(155, 212, 108)" width="15" height="15" y="60"></rect>
+                                        <rect fill="rgb(60, 167, 88)" width="15" height="15" y="75"></rect>
+                                    </svg>
+                                </div>
+                                <div id="divergingSchema4" class="paletteSelection"
+                                     onclick="divergingSchemaSelection(4)">
+                                    <svg height="90" width="15">
+                                        <rect fill="rgb(161, 102, 27)" width="15" height="15" y="0"></rect>
+                                        <rect fill="rgb(217, 182, 113)" width="15" height="15" y="15"></rect>
+                                        <rect fill="rgb(244, 234, 208)" width="15" height="15" y="30"></rect>
+                                        <rect fill="rgb(210, 236, 232)" width="15" height="15" y="45"></rect>
+                                        <rect fill="rgb(117, 195, 184)" width="15" height="15" y="60"></rect>
+                                        <rect fill="rgb(25, 123, 115)" width="15" height="15" y="75"></rect>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div style="clear: both; margin-bottom: 15px"></div>
+                        </div>
                         <div id="pickColorFrame" class="row">
                             <div class="col-md-12">
                                 <label for="palette">Pick color schema:</label>
@@ -166,10 +308,10 @@
                         Generate palette
                     </button>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-default" onclick="serialize()">Serialize</button>
-                    <pre id="preId" name="preId"></pre>
-                </div>
+                <!--<div> User's choice serialization-->
+                <!--<button type="button" class="btn btn-default" onclick="serialize()">Serialize</button>-->
+                <!--<pre id="preId" name="preId"></pre>-->
+                <!--</div>-->
                 <div class="modal-footer text-right">
                     <div class='form-group'>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
